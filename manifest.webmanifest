@@ -1,0 +1,26 @@
+{
+  "name": "REP/BIT — Training log",
+  "short_name": "REP/BIT",
+  "id": "./",
+  "description": "Diario personal de gimnasio con rutinas Push/Pull/Legs A/B, cardio y core",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f2f0e9",
+  "theme_color": "#1c2420",
+  "lang": "es",
+  "icons": [
+    {
+      "src": "./icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
