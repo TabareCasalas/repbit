@@ -1,19 +1,27 @@
-# REP/BIT v2.4 — GitHub Pages
+# REP/BIT v2.5 — GitHub Pages
 
-Web app estática para seguimiento personal de entrenamiento. No necesita servidor, dependencias ni compilación.
+Aplicación web personal para entrenamientos de fuerza (Push A/B, Pull A/B y Legs A/B), Core y Cardio.
 
 ## Publicar
 
-1. Crear un repositorio **público** en GitHub (por ejemplo, `repbit`).
-2. En ese repositorio, usar **Add file > Upload files** y subir **los archivos extraídos de este ZIP** (no subir el ZIP como un único archivo). Debe quedar `index.html` en la raíz, junto a `app.js`, `styles.css`, el manifiesto, el service worker y los iconos.
-3. En **Settings > Pages > Build and deployment**, seleccionar **Deploy from a branch**, `main` y `/(root)`, y guardar.
-4. La URL típica es `https://TU-USUARIO.github.io/repbit/`. El repositorio puede tener otro nombre; la URL cambiará según corresponda.
+1. Subí **el contenido de esta carpeta** (no el ZIP) a la raíz de tu repositorio GitHub.
+2. En **Settings → Pages → Build and deployment** elegí **Deploy from a branch**, `main`, `/(root)`.
+3. GitHub Pages publicará la web bajo `https://TU-USUARIO.github.io/NOMBRE-REPO/`.
 
-## Datos y privacidad
+No necesitás instalar dependencias ni ejecutar compilaciones.
 
-- La aplicación usa almacenamiento **local en el navegador**. Publicar el código en GitHub Pages **no sincroniza** automáticamente tus registros entre dispositivos.
-- Antes de dejar de usar otra versión: **Tus datos > Exportar JSON**; en la nueva URL: **Importar JSON**. Los orígenes del archivo HTML y de GitHub Pages tienen almacenamientos distintos.
-- La página publicada es accesible públicamente. No incluyas backups JSON o CSV con registros personales en el repositorio.
-- GitHub Pages funciona con HTTPS y admite instalación como aplicación web desde navegadores compatibles.
+## Cambios v2.5
 
-Guía oficial: https://docs.github.com/es/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site
+- Push A: extensión de tríceps sobre la cabeza en polea.
+- Push B: press de banca declinado con barra, peck deck y extensión unilateral de tríceps por encima de la cabeza sentado con mancuerna.
+- Pull A: curl inclinado con mancuernas en lugar de curl con barra.
+- Pull B: jalón neutro, remo en máquina, jalón con brazos extendidos y cuerda, pájaros y curl unilateral en polea baja.
+- Core: crunch horizontal en máquina e hiperextensión lateral para oblicuos (dos ejercicios predeterminados).
+- Catálogo expandido a 232 ejercicios con búsqueda por nombre, sinónimos, músculo y equipamiento; filtros por grupo.
+- Mantiene IDs previos, historial, copias JSON/CSV, navegación responsive y precarga de las últimas series.
+
+## Datos personales
+
+Se guardan **solo en el almacenamiento local del navegador**; no se sincronizan entre dispositivos. Hacé un respaldo JSON desde Datos antes de cambiar de versión. No subas el respaldo JSON al repositorio público.
+
+Para actualizar una instalación con caché, recargá la página después del despliegue.

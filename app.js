@@ -1,4 +1,4 @@
-/* REP/BIT v2.4 — personal training log */
+/* REP/BIT v2.5 — personal training log */
 (() => {
   'use strict';
   const STORAGE_KEY = 'repbit-data-v1';
@@ -22,36 +22,1874 @@
   const routineGroup = day => ROUTINES[day]?.group || day;
   const isCore = session => session?.day === 'core' && session.kind === 'strength';
   const CATALOG = [
-    ['p01','Press de banca con barra','push'],['p02','Press inclinado con mancuernas','push'],['p03','Press militar','push'],
-    ['p04','Elevaciones laterales','push'],['p05','Extensión de tríceps en polea','push'],['p06','Fondos en paralelas','push'],
-    ['p07','Press de pecho en máquina','push'],['p08','Aperturas con mancuernas','push'],['p09','Flexiones','push'],
-    ['p10','Press de hombros con mancuernas','push'],['p11','Aperturas en polea','push'],['p12','Press francés','push'],
-    ['p13','Press inclinado en máquina','push'],['p14','Press de hombros en máquina','push'],['p15','Extensión de tríceps sobre cabeza en polea','push'],
-    ['u01','Jalón al pecho','pull'],['u02','Remo con barra','pull'],['u03','Remo sentado en polea','pull'],
-    ['u04','Curl de bíceps con barra','pull'],['u05','Curl martillo','pull'],['u06','Dominadas','pull'],
-    ['u07','Remo con mancuerna','pull'],['u08','Face pull','pull'],['u09','Curl predicador','pull'],
-    ['u10','Pájaros con mancuernas','pull'],['u11','Pullover en polea','pull'],['u12','Remo en máquina','pull'],
-    ['u13','Dominadas asistidas','pull'],
-    ['l01','Sentadilla con barra','legs'],['l02','Prensa de piernas','legs'],['l03','Peso muerto rumano','legs'],
-    ['l04','Curl femoral','legs'],['l05','Extensiones de cuádriceps','legs'],['l06','Elevación de gemelos','legs'],
-    ['l07','Zancadas','legs'],['l08','Hip thrust','legs'],['l09','Sentadilla goblet','legs'],
-    ['l10','Sentadilla búlgara','legs'],['l11','Abducción de cadera','legs'],['l12','Step-up','legs'],
-    ['l13','Hip thrust en máquina','legs'],['l14','Elevación de gemelos sentado','legs'],['l15','Curl femoral sentado','legs'],
-    ['c01','Plancha frontal','core'],['c02','Plancha lateral','core'],['c03','Dead bug','core'],
-    ['c04','Bird dog','core'],['c05','Crunch abdominal','core'],['c06','Elevación de piernas','core'],
-    ['c07','Pallof press','core'],['c08','Hollow hold','core'],['c09','Crunch en polea','core'],
-    ['c10','Russian twist','core']
-  ].map(([id,name,group]) => ({id,name,group,custom:false}));
+    [
+        "p01",
+        "Press de banca con barra",
+        "push",
+        "Pecho",
+        "Barra",
+        "bench press pecho plano"
+    ],
+    [
+        "p16",
+        "Press de banca declinado con barra",
+        "push",
+        "Pecho",
+        "Barra",
+        "decline bench pecho declinado"
+    ],
+    [
+        "p19",
+        "Press inclinado con barra",
+        "push",
+        "Pecho",
+        "Barra",
+        "incline bench"
+    ],
+    [
+        "p20",
+        "Press de banca con agarre cerrado",
+        "push",
+        "Pecho",
+        "Barra",
+        "close grip triceps"
+    ],
+    [
+        "p21",
+        "Press de banca en máquina Smith",
+        "push",
+        "Pecho",
+        "Barra",
+        "press smith"
+    ],
+    [
+        "p22",
+        "Press inclinado en máquina Smith",
+        "push",
+        "Pecho",
+        "Barra",
+        "smith inclinado"
+    ],
+    [
+        "p23",
+        "Press de banca con pausa",
+        "push",
+        "Pecho",
+        "Barra",
+        "pause bench"
+    ],
+    [
+        "p02",
+        "Press inclinado con mancuernas",
+        "push",
+        "Pecho",
+        "Mancuernas",
+        "incline dumbbell"
+    ],
+    [
+        "p24",
+        "Press plano con mancuernas",
+        "push",
+        "Pecho",
+        "Mancuernas",
+        "flat dumbbell press"
+    ],
+    [
+        "p25",
+        "Press declinado con mancuernas",
+        "push",
+        "Pecho",
+        "Mancuernas",
+        "decline db"
+    ],
+    [
+        "p26",
+        "Press con mancuernas agarre neutro",
+        "push",
+        "Pecho",
+        "Mancuernas",
+        "neutral grip dumbbells"
+    ],
+    [
+        "p27",
+        "Press en el suelo con mancuernas",
+        "push",
+        "Pecho",
+        "Mancuernas",
+        "floor press"
+    ],
+    [
+        "p08",
+        "Aperturas con mancuernas",
+        "push",
+        "Pecho",
+        "Mancuernas",
+        "dumbbell fly chest"
+    ],
+    [
+        "p28",
+        "Aperturas inclinadas con mancuernas",
+        "push",
+        "Pecho",
+        "Mancuernas",
+        "incline fly"
+    ],
+    [
+        "p29",
+        "Squeeze press con mancuernas",
+        "push",
+        "Pecho",
+        "Mancuernas",
+        "press compresion"
+    ],
+    [
+        "p07",
+        "Press de pecho en máquina",
+        "push",
+        "Pecho",
+        "Máquina",
+        "chest press"
+    ],
+    [
+        "p13",
+        "Press inclinado en máquina",
+        "push",
+        "Pecho",
+        "Máquina",
+        "incline machine"
+    ],
+    [
+        "p30",
+        "Press declinado en máquina",
+        "push",
+        "Pecho",
+        "Máquina",
+        "decline machine chest press"
+    ],
+    [
+        "p31",
+        "Press convergente de pecho en máquina",
+        "push",
+        "Pecho",
+        "Máquina",
+        "converging chest press"
+    ],
+    [
+        "p17",
+        "Aperturas en máquina (peck deck)",
+        "push",
+        "Pecho",
+        "Máquina",
+        "machine fly machine flys pec deck contractor"
+    ],
+    [
+        "p32",
+        "Press de pecho unilateral en máquina",
+        "push",
+        "Pecho",
+        "Máquina",
+        "single arm chest press"
+    ],
+    [
+        "p11",
+        "Aperturas en polea",
+        "push",
+        "Pecho",
+        "Polea",
+        "cable fly cruce poleas"
+    ],
+    [
+        "p33",
+        "Aperturas en polea de abajo hacia arriba",
+        "push",
+        "Pecho",
+        "Polea",
+        "low to high cable fly"
+    ],
+    [
+        "p34",
+        "Aperturas en polea de arriba hacia abajo",
+        "push",
+        "Pecho",
+        "Polea",
+        "high to low cable fly"
+    ],
+    [
+        "p35",
+        "Press de pecho de pie en polea",
+        "push",
+        "Pecho",
+        "Polea",
+        "cable chest press"
+    ],
+    [
+        "p36",
+        "Press de pecho unilateral en polea",
+        "push",
+        "Pecho",
+        "Polea",
+        "single arm cable press"
+    ],
+    [
+        "p09",
+        "Flexiones",
+        "push",
+        "Pecho",
+        "Peso corporal",
+        "push ups lagartijas"
+    ],
+    [
+        "p06",
+        "Fondos en paralelas",
+        "push",
+        "Pecho",
+        "Peso corporal",
+        "dips"
+    ],
+    [
+        "p37",
+        "Flexiones con manos elevadas",
+        "push",
+        "Pecho",
+        "Peso corporal",
+        "incline push ups"
+    ],
+    [
+        "p38",
+        "Flexiones con pies elevados",
+        "push",
+        "Pecho",
+        "Peso corporal",
+        "decline push ups"
+    ],
+    [
+        "p39",
+        "Flexiones con agarre estrecho",
+        "push",
+        "Pecho",
+        "Peso corporal",
+        "diamond push ups"
+    ],
+    [
+        "p03",
+        "Press militar",
+        "push",
+        "Hombros",
+        "Barra",
+        "overhead press barra"
+    ],
+    [
+        "p40",
+        "Press militar sentado con barra",
+        "push",
+        "Hombros",
+        "Barra",
+        "seated barbell shoulder press"
+    ],
+    [
+        "p10",
+        "Press de hombros con mancuernas",
+        "push",
+        "Hombros",
+        "Mancuernas",
+        "shoulder press"
+    ],
+    [
+        "p41",
+        "Press Arnold",
+        "push",
+        "Hombros",
+        "Mancuernas",
+        "arnold press"
+    ],
+    [
+        "p04",
+        "Elevaciones laterales",
+        "push",
+        "Hombros",
+        "Mancuernas",
+        "lateral raise mancuernas"
+    ],
+    [
+        "p42",
+        "Elevaciones laterales sentado",
+        "push",
+        "Hombros",
+        "Mancuernas",
+        "seated lateral raise"
+    ],
+    [
+        "p43",
+        "Elevaciones frontales con mancuernas",
+        "push",
+        "Hombros",
+        "Mancuernas",
+        "front raise"
+    ],
+    [
+        "p44",
+        "Press unilateral de hombros con mancuerna",
+        "push",
+        "Hombros",
+        "Mancuernas",
+        "single arm overhead press"
+    ],
+    [
+        "p14",
+        "Press de hombros en máquina",
+        "push",
+        "Hombros",
+        "Máquina",
+        "machine shoulder press"
+    ],
+    [
+        "p45",
+        "Elevaciones laterales en máquina",
+        "push",
+        "Hombros",
+        "Máquina",
+        "lateral raise machine"
+    ],
+    [
+        "p46",
+        "Elevaciones laterales en polea",
+        "push",
+        "Hombros",
+        "Polea",
+        "cable lateral raise"
+    ],
+    [
+        "p47",
+        "Elevaciones laterales unilaterales en polea",
+        "push",
+        "Hombros",
+        "Polea",
+        "single arm lateral raise"
+    ],
+    [
+        "p48",
+        "Elevaciones frontales en polea",
+        "push",
+        "Hombros",
+        "Polea",
+        "cable front raise"
+    ],
+    [
+        "p49",
+        "Press landmine a una mano",
+        "push",
+        "Hombros",
+        "Polea",
+        "landmine press"
+    ],
+    [
+        "p05",
+        "Extensión de tríceps en polea",
+        "push",
+        "Tríceps",
+        "Polea",
+        "pushdown barra"
+    ],
+    [
+        "p15",
+        "Extensión de tríceps sobre la cabeza en polea",
+        "push",
+        "Tríceps",
+        "Polea",
+        "overhead extension triceps"
+    ],
+    [
+        "p50",
+        "Extensión de tríceps con cuerda en polea",
+        "push",
+        "Tríceps",
+        "Polea",
+        "rope pushdown"
+    ],
+    [
+        "p51",
+        "Extensión unilateral de tríceps en polea",
+        "push",
+        "Tríceps",
+        "Polea",
+        "single arm tricep extension"
+    ],
+    [
+        "p52",
+        "Extensión de tríceps en polea con agarre inverso",
+        "push",
+        "Tríceps",
+        "Polea",
+        "reverse grip pushdown"
+    ],
+    [
+        "p53",
+        "Extensión cruzada de tríceps en polea",
+        "push",
+        "Tríceps",
+        "Polea",
+        "cross body extension"
+    ],
+    [
+        "p18",
+        "Extensión unilateral de tríceps con mancuerna sentado",
+        "push",
+        "Tríceps",
+        "Mancuernas",
+        "single arm overhead seated dumbbell extension"
+    ],
+    [
+        "p54",
+        "Extensión de tríceps sobre la cabeza con dos manos",
+        "push",
+        "Tríceps",
+        "Mancuernas",
+        "two hand overhead dumbbell extension"
+    ],
+    [
+        "p55",
+        "Press francés con mancuernas acostado",
+        "push",
+        "Tríceps",
+        "Mancuernas",
+        "lying dumbbell triceps extension"
+    ],
+    [
+        "p56",
+        "Patada de tríceps con mancuerna",
+        "push",
+        "Tríceps",
+        "Mancuernas",
+        "triceps kickback"
+    ],
+    [
+        "p12",
+        "Press francés",
+        "push",
+        "Tríceps",
+        "Barra",
+        "skullcrushers barra z ez french press"
+    ],
+    [
+        "p57",
+        "Extensión de tríceps acostado con barra EZ",
+        "push",
+        "Tríceps",
+        "Barra",
+        "skull crusher press frances barra z"
+    ],
+    [
+        "p58",
+        "Extensión de tríceps en máquina",
+        "push",
+        "Tríceps",
+        "Máquina",
+        "tricep extension machine"
+    ],
+    [
+        "p59",
+        "Fondos de tríceps en máquina",
+        "push",
+        "Tríceps",
+        "Máquina",
+        "machine dips"
+    ],
+    [
+        "u01",
+        "Jalón al pecho",
+        "pull",
+        "Espalda · tracción vertical",
+        "Polea",
+        "lat pulldown prono"
+    ],
+    [
+        "u14",
+        "Jalón al pecho con agarre neutro",
+        "pull",
+        "Espalda · tracción vertical",
+        "Polea",
+        "neutral grip lat pulldown palmas enfrentadas"
+    ],
+    [
+        "u18",
+        "Jalón al pecho con agarre supino",
+        "pull",
+        "Espalda · tracción vertical",
+        "Polea",
+        "chin grip pulldown"
+    ],
+    [
+        "u19",
+        "Jalón al pecho con agarre amplio",
+        "pull",
+        "Espalda · tracción vertical",
+        "Polea",
+        "wide grip lat pulldown"
+    ],
+    [
+        "u20",
+        "Jalón unilateral en polea alta",
+        "pull",
+        "Espalda · tracción vertical",
+        "Polea",
+        "single arm lat pulldown"
+    ],
+    [
+        "u21",
+        "Jalón al pecho con agarre estrecho",
+        "pull",
+        "Espalda · tracción vertical",
+        "Polea",
+        "close grip lat pulldown"
+    ],
+    [
+        "u22",
+        "Jalón al pecho con cuerda",
+        "pull",
+        "Espalda · tracción vertical",
+        "Polea",
+        "rope lat pulldown"
+    ],
+    [
+        "u06",
+        "Dominadas",
+        "pull",
+        "Espalda · tracción vertical",
+        "Peso corporal",
+        "pull ups"
+    ],
+    [
+        "u13",
+        "Dominadas asistidas",
+        "pull",
+        "Espalda · tracción vertical",
+        "Peso corporal",
+        "assisted pull ups"
+    ],
+    [
+        "u23",
+        "Dominadas con agarre neutro",
+        "pull",
+        "Espalda · tracción vertical",
+        "Peso corporal",
+        "neutral grip pullups"
+    ],
+    [
+        "u24",
+        "Dominadas supinas",
+        "pull",
+        "Espalda · tracción vertical",
+        "Peso corporal",
+        "chin ups"
+    ],
+    [
+        "u25",
+        "Dominadas con banda de asistencia",
+        "pull",
+        "Espalda · tracción vertical",
+        "Peso corporal",
+        "band assisted pull ups"
+    ],
+    [
+        "u02",
+        "Remo con barra",
+        "pull",
+        "Espalda · remo",
+        "Barra",
+        "barbell row"
+    ],
+    [
+        "u26",
+        "Remo Pendlay",
+        "pull",
+        "Espalda · remo",
+        "Barra",
+        "pendlay row"
+    ],
+    [
+        "u27",
+        "Remo con barra T",
+        "pull",
+        "Espalda · remo",
+        "Barra",
+        "t bar row"
+    ],
+    [
+        "u28",
+        "Remo invertido en barra",
+        "pull",
+        "Espalda · remo",
+        "Barra",
+        "inverted row australian"
+    ],
+    [
+        "u07",
+        "Remo con mancuerna",
+        "pull",
+        "Espalda · remo",
+        "Mancuernas",
+        "dumbbell row"
+    ],
+    [
+        "u29",
+        "Remo con pecho apoyado y mancuernas",
+        "pull",
+        "Espalda · remo",
+        "Mancuernas",
+        "chest supported dumbbell row"
+    ],
+    [
+        "u30",
+        "Remo unilateral con mancuerna en banco",
+        "pull",
+        "Espalda · remo",
+        "Mancuernas",
+        "one arm dumbbell row"
+    ],
+    [
+        "u31",
+        "Remo con mancuernas en banco inclinado",
+        "pull",
+        "Espalda · remo",
+        "Mancuernas",
+        "incline bench row"
+    ],
+    [
+        "u03",
+        "Remo sentado en polea",
+        "pull",
+        "Espalda · remo",
+        "Polea",
+        "seated cable row"
+    ],
+    [
+        "u32",
+        "Remo unilateral en polea baja",
+        "pull",
+        "Espalda · remo",
+        "Polea",
+        "one arm cable row"
+    ],
+    [
+        "u33",
+        "Remo sentado con agarre amplio",
+        "pull",
+        "Espalda · remo",
+        "Polea",
+        "wide grip cable row"
+    ],
+    [
+        "u34",
+        "Remo en polea alta hacia el pecho",
+        "pull",
+        "Espalda · remo",
+        "Polea",
+        "high cable row"
+    ],
+    [
+        "u35",
+        "Remo con cuerda en polea baja",
+        "pull",
+        "Espalda · remo",
+        "Polea",
+        "rope cable row"
+    ],
+    [
+        "u12",
+        "Remo en máquina",
+        "pull",
+        "Espalda · remo",
+        "Máquina",
+        "machine row"
+    ],
+    [
+        "u36",
+        "Remo en máquina con pecho apoyado",
+        "pull",
+        "Espalda · remo",
+        "Máquina",
+        "chest supported machine row"
+    ],
+    [
+        "u37",
+        "Remo unilateral en máquina",
+        "pull",
+        "Espalda · remo",
+        "Máquina",
+        "single arm machine row"
+    ],
+    [
+        "u38",
+        "Remo alto en máquina",
+        "pull",
+        "Espalda · remo",
+        "Máquina",
+        "high row"
+    ],
+    [
+        "u39",
+        "Remo con barra T apoyado en máquina",
+        "pull",
+        "Espalda · remo",
+        "Máquina",
+        "chest supported t bar"
+    ],
+    [
+        "u11",
+        "Pullover en polea",
+        "pull",
+        "Dorsales",
+        "Polea",
+        "straight arm pulldown barra"
+    ],
+    [
+        "u15",
+        "Jalón con brazos extendidos y cuerda",
+        "pull",
+        "Dorsales",
+        "Polea",
+        "rope straight arm pulldown pull over"
+    ],
+    [
+        "u40",
+        "Jalón con brazos extendidos y barra",
+        "pull",
+        "Dorsales",
+        "Polea",
+        "bar straight arm pulldown"
+    ],
+    [
+        "u41",
+        "Pullover unilateral en polea",
+        "pull",
+        "Dorsales",
+        "Polea",
+        "single arm pullover"
+    ],
+    [
+        "u42",
+        "Pullover en máquina",
+        "pull",
+        "Dorsales",
+        "Máquina",
+        "machine pullover"
+    ],
+    [
+        "u43",
+        "Pullover con mancuerna",
+        "pull",
+        "Dorsales",
+        "Mancuernas",
+        "dumbbell pullover"
+    ],
+    [
+        "u08",
+        "Face pull",
+        "pull",
+        "Deltoides posteriores",
+        "Polea",
+        "facepull cuerda"
+    ],
+    [
+        "u44",
+        "Aperturas inversas en polea",
+        "pull",
+        "Deltoides posteriores",
+        "Polea",
+        "reverse cable fly"
+    ],
+    [
+        "u45",
+        "Pájaros unilaterales en polea",
+        "pull",
+        "Deltoides posteriores",
+        "Polea",
+        "single arm rear delt fly"
+    ],
+    [
+        "u10",
+        "Pájaros con mancuernas",
+        "pull",
+        "Deltoides posteriores",
+        "Mancuernas",
+        "rear delt fly"
+    ],
+    [
+        "u46",
+        "Pájaros en banco inclinado",
+        "pull",
+        "Deltoides posteriores",
+        "Mancuernas",
+        "chest supported reverse fly"
+    ],
+    [
+        "u47",
+        "Elevaciones en Y con mancuernas",
+        "pull",
+        "Deltoides posteriores",
+        "Mancuernas",
+        "Y raise"
+    ],
+    [
+        "u48",
+        "Aperturas inversas en máquina (reverse peck deck)",
+        "pull",
+        "Deltoides posteriores",
+        "Máquina",
+        "rear delt machine"
+    ],
+    [
+        "u49",
+        "Encogimientos de hombros con mancuernas",
+        "pull",
+        "Trapecios",
+        "Mancuernas",
+        "shrugs"
+    ],
+    [
+        "u50",
+        "Elevaciones en Y sobre banco",
+        "pull",
+        "Trapecios",
+        "Mancuernas",
+        "lower traps"
+    ],
+    [
+        "u51",
+        "Encogimientos de hombros en máquina",
+        "pull",
+        "Trapecios",
+        "Máquina",
+        "machine shrugs"
+    ],
+    [
+        "u04",
+        "Curl de bíceps con barra",
+        "pull",
+        "Bíceps",
+        "Barra",
+        "barbell curl"
+    ],
+    [
+        "u05",
+        "Curl martillo",
+        "pull",
+        "Bíceps",
+        "Mancuernas",
+        "hammer curl"
+    ],
+    [
+        "u17",
+        "Curl inclinado con mancuernas",
+        "pull",
+        "Bíceps",
+        "Mancuernas",
+        "incline dumbbell biceps curl"
+    ],
+    [
+        "u52",
+        "Curl alternado con mancuernas",
+        "pull",
+        "Bíceps",
+        "Mancuernas",
+        "alternating dumbbell curl"
+    ],
+    [
+        "u53",
+        "Curl de bíceps con mancuernas sentado",
+        "pull",
+        "Bíceps",
+        "Mancuernas",
+        "seated dumbbell curl"
+    ],
+    [
+        "u54",
+        "Curl concentración con mancuerna",
+        "pull",
+        "Bíceps",
+        "Mancuernas",
+        "concentration curl"
+    ],
+    [
+        "u55",
+        "Curl predicador unilateral con mancuerna",
+        "pull",
+        "Bíceps",
+        "Mancuernas",
+        "single arm preacher curl"
+    ],
+    [
+        "u56",
+        "Curl martillo cruzado",
+        "pull",
+        "Bíceps",
+        "Mancuernas",
+        "cross body hammer curl"
+    ],
+    [
+        "u57",
+        "Curl tipo Zottman con mancuernas",
+        "pull",
+        "Bíceps",
+        "Mancuernas",
+        "zottman curl"
+    ],
+    [
+        "u58",
+        "Curl spider con mancuernas",
+        "pull",
+        "Bíceps",
+        "Mancuernas",
+        "spider curl"
+    ],
+    [
+        "u59",
+        "Curl invertido con mancuernas",
+        "pull",
+        "Bíceps",
+        "Mancuernas",
+        "reverse dumbbell curl"
+    ],
+    [
+        "u16",
+        "Curl unilateral en polea baja",
+        "pull",
+        "Bíceps",
+        "Polea",
+        "single arm low cable biceps curl"
+    ],
+    [
+        "u60",
+        "Curl de bíceps en polea baja",
+        "pull",
+        "Bíceps",
+        "Polea",
+        "low cable curl"
+    ],
+    [
+        "u61",
+        "Curl martillo con cuerda en polea",
+        "pull",
+        "Bíceps",
+        "Polea",
+        "rope hammer cable curl"
+    ],
+    [
+        "u62",
+        "Curl bayesiano en polea",
+        "pull",
+        "Bíceps",
+        "Polea",
+        "bayesian cable curl"
+    ],
+    [
+        "u63",
+        "Curl de bíceps en polea alta",
+        "pull",
+        "Bíceps",
+        "Polea",
+        "high cable curl double biceps"
+    ],
+    [
+        "u64",
+        "Curl concentrado en polea baja",
+        "pull",
+        "Bíceps",
+        "Polea",
+        "single cable curl"
+    ],
+    [
+        "u09",
+        "Curl predicador",
+        "pull",
+        "Bíceps",
+        "Máquina",
+        "preacher curl barra"
+    ],
+    [
+        "u65",
+        "Curl de bíceps en máquina",
+        "pull",
+        "Bíceps",
+        "Máquina",
+        "biceps machine curl"
+    ],
+    [
+        "u66",
+        "Curl predicador unilateral en máquina",
+        "pull",
+        "Bíceps",
+        "Máquina",
+        "unilateral machine preacher"
+    ],
+    [
+        "u67",
+        "Curl de muñeca con mancuerna",
+        "pull",
+        "Antebrazos",
+        "Mancuernas",
+        "wrist curl"
+    ],
+    [
+        "u68",
+        "Extensión de muñeca con mancuerna",
+        "pull",
+        "Antebrazos",
+        "Mancuernas",
+        "wrist extension"
+    ],
+    [
+        "u69",
+        "Curl de muñeca martillo",
+        "pull",
+        "Antebrazos",
+        "Mancuernas",
+        "radial deviation"
+    ],
+    [
+        "l01",
+        "Sentadilla con barra",
+        "legs",
+        "Cuádriceps",
+        "Barra",
+        "back squat clasica squat"
+    ],
+    [
+        "l16",
+        "Sentadilla frontal con barra",
+        "legs",
+        "Cuádriceps",
+        "Barra",
+        "front squat"
+    ],
+    [
+        "l17",
+        "Sentadilla en máquina Smith",
+        "legs",
+        "Cuádriceps",
+        "Barra",
+        "smith squat"
+    ],
+    [
+        "l18",
+        "Sentadilla con barra de seguridad",
+        "legs",
+        "Cuádriceps",
+        "Barra",
+        "safety bar squat"
+    ],
+    [
+        "l19",
+        "Sentadilla con pausa",
+        "legs",
+        "Cuádriceps",
+        "Barra",
+        "pause squat"
+    ],
+    [
+        "l02",
+        "Prensa de piernas",
+        "legs",
+        "Cuádriceps",
+        "Máquina",
+        "leg press"
+    ],
+    [
+        "l20",
+        "Sentadilla hack",
+        "legs",
+        "Cuádriceps",
+        "Máquina",
+        "hack squat"
+    ],
+    [
+        "l21",
+        "Sentadilla pendular en máquina",
+        "legs",
+        "Cuádriceps",
+        "Máquina",
+        "pendulum squat"
+    ],
+    [
+        "l22",
+        "Prensa de piernas horizontal",
+        "legs",
+        "Cuádriceps",
+        "Máquina",
+        "horizontal leg press"
+    ],
+    [
+        "l23",
+        "Prensa de piernas unilateral",
+        "legs",
+        "Cuádriceps",
+        "Máquina",
+        "single leg press"
+    ],
+    [
+        "l24",
+        "Sentadilla en máquina V-squat",
+        "legs",
+        "Cuádriceps",
+        "Máquina",
+        "v squat"
+    ],
+    [
+        "l25",
+        "Sentadilla en máquina belt squat",
+        "legs",
+        "Cuádriceps",
+        "Máquina",
+        "belt squat"
+    ],
+    [
+        "l05",
+        "Extensiones de cuádriceps",
+        "legs",
+        "Cuádriceps",
+        "Máquina",
+        "leg extension"
+    ],
+    [
+        "l26",
+        "Extensión de cuádriceps unilateral",
+        "legs",
+        "Cuádriceps",
+        "Máquina",
+        "single leg extension"
+    ],
+    [
+        "l09",
+        "Sentadilla goblet",
+        "legs",
+        "Cuádriceps",
+        "Mancuernas",
+        "goblet squat"
+    ],
+    [
+        "l10",
+        "Sentadilla búlgara",
+        "legs",
+        "Cuádriceps",
+        "Mancuernas",
+        "bulgarian split squat"
+    ],
+    [
+        "l27",
+        "Sentadilla con talones elevados",
+        "legs",
+        "Cuádriceps",
+        "Mancuernas",
+        "heels elevated squat"
+    ],
+    [
+        "l28",
+        "Sentadilla dividida con mancuernas",
+        "legs",
+        "Cuádriceps",
+        "Mancuernas",
+        "dumbbell split squat"
+    ],
+    [
+        "l29",
+        "Zancada inversa con mancuernas",
+        "legs",
+        "Cuádriceps",
+        "Mancuernas",
+        "reverse lunge"
+    ],
+    [
+        "l30",
+        "Zancadas caminando",
+        "legs",
+        "Cuádriceps",
+        "Mancuernas",
+        "walking lunges"
+    ],
+    [
+        "l31",
+        "Zancada lateral con mancuernas",
+        "legs",
+        "Cuádriceps",
+        "Mancuernas",
+        "lateral lunges"
+    ],
+    [
+        "l32",
+        "Step-up con mancuernas",
+        "legs",
+        "Cuádriceps",
+        "Mancuernas",
+        "step up"
+    ],
+    [
+        "l07",
+        "Zancadas",
+        "legs",
+        "Cuádriceps",
+        "Peso corporal",
+        "lunges"
+    ],
+    [
+        "l12",
+        "Step-up",
+        "legs",
+        "Cuádriceps",
+        "Peso corporal",
+        "subida banco escalon"
+    ],
+    [
+        "l33",
+        "Sentadilla al aire",
+        "legs",
+        "Cuádriceps",
+        "Peso corporal",
+        "air squat bodyweight"
+    ],
+    [
+        "l34",
+        "Sentadilla española con banda",
+        "legs",
+        "Cuádriceps",
+        "Peso corporal",
+        "spanish squat"
+    ],
+    [
+        "l35",
+        "Sentadilla isométrica en pared",
+        "legs",
+        "Cuádriceps",
+        "Peso corporal",
+        "wall sit"
+    ],
+    [
+        "l36",
+        "Sentadilla pistol asistida",
+        "legs",
+        "Cuádriceps",
+        "Peso corporal",
+        "assisted pistol squat"
+    ],
+    [
+        "l04",
+        "Curl femoral",
+        "legs",
+        "Isquiotibiales",
+        "Máquina",
+        "leg curl"
+    ],
+    [
+        "l15",
+        "Curl femoral sentado",
+        "legs",
+        "Isquiotibiales",
+        "Máquina",
+        "seated leg curl"
+    ],
+    [
+        "l37",
+        "Curl femoral acostado",
+        "legs",
+        "Isquiotibiales",
+        "Máquina",
+        "lying leg curl"
+    ],
+    [
+        "l38",
+        "Curl femoral de pie",
+        "legs",
+        "Isquiotibiales",
+        "Máquina",
+        "standing leg curl"
+    ],
+    [
+        "l39",
+        "Curl femoral unilateral",
+        "legs",
+        "Isquiotibiales",
+        "Máquina",
+        "single leg curl"
+    ],
+    [
+        "l03",
+        "Peso muerto rumano",
+        "legs",
+        "Isquiotibiales",
+        "Mancuernas",
+        "romanian deadlift"
+    ],
+    [
+        "l40",
+        "Peso muerto rumano con mancuernas",
+        "legs",
+        "Isquiotibiales",
+        "Mancuernas",
+        "dumbbell RDL"
+    ],
+    [
+        "l41",
+        "Curl nórdico asistido",
+        "legs",
+        "Isquiotibiales",
+        "Peso corporal",
+        "assisted nordic hamstring curl"
+    ],
+    [
+        "l42",
+        "Curl femoral deslizante",
+        "legs",
+        "Isquiotibiales",
+        "Peso corporal",
+        "sliding hamstring curl"
+    ],
+    [
+        "l43",
+        "Curl femoral con pelota suiza",
+        "legs",
+        "Isquiotibiales",
+        "Peso corporal",
+        "swiss ball hamstring curl"
+    ],
+    [
+        "l13",
+        "Hip thrust en máquina",
+        "legs",
+        "Glúteos",
+        "Máquina",
+        "machine hip thrust"
+    ],
+    [
+        "l44",
+        "Patada de glúteos en máquina",
+        "legs",
+        "Glúteos",
+        "Máquina",
+        "machine glute kickback"
+    ],
+    [
+        "l11",
+        "Abducción de cadera",
+        "legs",
+        "Glúteos",
+        "Máquina",
+        "hip abduction machine"
+    ],
+    [
+        "l45",
+        "Abducción unilateral de cadera en máquina",
+        "legs",
+        "Glúteos",
+        "Máquina",
+        "single leg hip abduction"
+    ],
+    [
+        "l08",
+        "Hip thrust",
+        "legs",
+        "Glúteos",
+        "Barra",
+        "barbell hip thrust"
+    ],
+    [
+        "l46",
+        "Hip thrust en máquina Smith",
+        "legs",
+        "Glúteos",
+        "Barra",
+        "smith hip thrust"
+    ],
+    [
+        "l47",
+        "Patada de glúteos en polea",
+        "legs",
+        "Glúteos",
+        "Polea",
+        "cable kickback"
+    ],
+    [
+        "l48",
+        "Abducción de cadera en polea",
+        "legs",
+        "Glúteos",
+        "Polea",
+        "cable abduction"
+    ],
+    [
+        "l49",
+        "Pull-through en polea",
+        "legs",
+        "Glúteos",
+        "Polea",
+        "cable pullthrough"
+    ],
+    [
+        "l50",
+        "Puente de glúteos",
+        "legs",
+        "Glúteos",
+        "Peso corporal",
+        "glute bridge"
+    ],
+    [
+        "l51",
+        "Puente de glúteos a una pierna",
+        "legs",
+        "Glúteos",
+        "Peso corporal",
+        "single leg glute bridge"
+    ],
+    [
+        "l52",
+        "Abducción de cadera acostado de lado",
+        "legs",
+        "Glúteos",
+        "Peso corporal",
+        "side lying hip abduction"
+    ],
+    [
+        "l53",
+        "Clamshell con minibanda",
+        "legs",
+        "Glúteos",
+        "Peso corporal",
+        "clamshell"
+    ],
+    [
+        "l54",
+        "Frog pumps",
+        "legs",
+        "Glúteos",
+        "Peso corporal",
+        "glute frog bridge"
+    ],
+    [
+        "l55",
+        "Aducción de cadera en máquina",
+        "legs",
+        "Aductores",
+        "Máquina",
+        "hip adduction"
+    ],
+    [
+        "l56",
+        "Aducción de cadera en polea",
+        "legs",
+        "Aductores",
+        "Polea",
+        "cable hip adduction"
+    ],
+    [
+        "l06",
+        "Elevación de gemelos",
+        "legs",
+        "Gemelos",
+        "Máquina",
+        "calf raises"
+    ],
+    [
+        "l14",
+        "Elevación de gemelos sentado",
+        "legs",
+        "Gemelos",
+        "Máquina",
+        "seated calf raise"
+    ],
+    [
+        "l57",
+        "Elevación de gemelos de pie en máquina",
+        "legs",
+        "Gemelos",
+        "Máquina",
+        "standing calf machine"
+    ],
+    [
+        "l58",
+        "Elevación de gemelos en prensa",
+        "legs",
+        "Gemelos",
+        "Máquina",
+        "calf press leg press"
+    ],
+    [
+        "l59",
+        "Elevación de gemelos tipo donkey",
+        "legs",
+        "Gemelos",
+        "Máquina",
+        "donkey calf raise"
+    ],
+    [
+        "l60",
+        "Elevación de gemelos a una pierna",
+        "legs",
+        "Gemelos",
+        "Peso corporal",
+        "single leg calf raise"
+    ],
+    [
+        "l61",
+        "Elevación de tibial anterior",
+        "legs",
+        "Gemelos",
+        "Peso corporal",
+        "tibialis raises"
+    ],
+    [
+        "c11",
+        "Crunch horizontal en máquina",
+        "core",
+        "Abdominales",
+        "Máquina",
+        "horizontal crunch crunch machine abdominal maquina"
+    ],
+    [
+        "c13",
+        "Crunch abdominal sentado en máquina",
+        "core",
+        "Abdominales",
+        "Máquina",
+        "machine crunch seated"
+    ],
+    [
+        "c14",
+        "Rotación de torso en máquina",
+        "core",
+        "Abdominales",
+        "Máquina",
+        "rotary torso machine oblicuos"
+    ],
+    [
+        "c12",
+        "Hiperextensión lateral para oblicuos",
+        "core",
+        "Oblicuos",
+        "Banco",
+        "flexion lateral banco 45 side hyperextension side bend banco romano"
+    ],
+    [
+        "c05",
+        "Crunch abdominal",
+        "core",
+        "Abdominales",
+        "Peso corporal",
+        "abdominal crunch"
+    ],
+    [
+        "c15",
+        "Crunch inverso",
+        "core",
+        "Abdominales",
+        "Peso corporal",
+        "reverse crunch"
+    ],
+    [
+        "c16",
+        "Crunch bicicleta",
+        "core",
+        "Abdominales",
+        "Peso corporal",
+        "bicycle crunch"
+    ],
+    [
+        "c17",
+        "Crunch con piernas elevadas",
+        "core",
+        "Abdominales",
+        "Peso corporal",
+        "toe touches"
+    ],
+    [
+        "c18",
+        "Crunch en banco declinado",
+        "core",
+        "Abdominales",
+        "Peso corporal",
+        "decline crunch"
+    ],
+    [
+        "c19",
+        "Abdominal en V",
+        "core",
+        "Abdominales",
+        "Peso corporal",
+        "V up"
+    ],
+    [
+        "c20",
+        "Elevación de rodillas en paralelas",
+        "core",
+        "Abdominales",
+        "Peso corporal",
+        "captain chair knee raise"
+    ],
+    [
+        "c21",
+        "Elevación de rodillas colgado",
+        "core",
+        "Abdominales",
+        "Peso corporal",
+        "hanging knee raise"
+    ],
+    [
+        "c06",
+        "Elevación de piernas",
+        "core",
+        "Abdominales",
+        "Peso corporal",
+        "leg raise"
+    ],
+    [
+        "c22",
+        "Elevación de piernas colgado",
+        "core",
+        "Abdominales",
+        "Peso corporal",
+        "hanging leg raise"
+    ],
+    [
+        "c23",
+        "Flutter kicks",
+        "core",
+        "Abdominales",
+        "Peso corporal",
+        "patada alternada"
+    ],
+    [
+        "c09",
+        "Crunch en polea",
+        "core",
+        "Abdominales",
+        "Polea",
+        "cable crunch"
+    ],
+    [
+        "c24",
+        "Crunch oblicuo en polea",
+        "core",
+        "Abdominales",
+        "Polea",
+        "cable side crunch"
+    ],
+    [
+        "c01",
+        "Plancha frontal",
+        "core",
+        "Estabilidad",
+        "Peso corporal",
+        "plank"
+    ],
+    [
+        "c02",
+        "Plancha lateral",
+        "core",
+        "Estabilidad",
+        "Peso corporal",
+        "side plank"
+    ],
+    [
+        "c03",
+        "Dead bug",
+        "core",
+        "Estabilidad",
+        "Peso corporal",
+        "deadbug"
+    ],
+    [
+        "c04",
+        "Bird dog",
+        "core",
+        "Estabilidad",
+        "Peso corporal",
+        "birddog"
+    ],
+    [
+        "c08",
+        "Hollow hold",
+        "core",
+        "Estabilidad",
+        "Peso corporal",
+        "hollow body"
+    ],
+    [
+        "c25",
+        "Plancha con toque de hombros",
+        "core",
+        "Estabilidad",
+        "Peso corporal",
+        "plank shoulder taps"
+    ],
+    [
+        "c26",
+        "Plancha lateral con elevación de cadera",
+        "core",
+        "Estabilidad",
+        "Peso corporal",
+        "side plank hip dips"
+    ],
+    [
+        "c27",
+        "Plancha de oso",
+        "core",
+        "Estabilidad",
+        "Peso corporal",
+        "bear plank"
+    ],
+    [
+        "c28",
+        "Hollow rocks",
+        "core",
+        "Estabilidad",
+        "Peso corporal",
+        "hollow rock"
+    ],
+    [
+        "c29",
+        "Curl-up de McGill",
+        "core",
+        "Estabilidad",
+        "Peso corporal",
+        "mcgill curlup"
+    ],
+    [
+        "c30",
+        "Superman",
+        "core",
+        "Estabilidad",
+        "Peso corporal",
+        "superman hold"
+    ],
+    [
+        "c31",
+        "Plancha Copenhagen asistida",
+        "core",
+        "Estabilidad",
+        "Peso corporal",
+        "copenhagen plank"
+    ],
+    [
+        "c07",
+        "Pallof press",
+        "core",
+        "Estabilidad",
+        "Polea",
+        "antirotacion anti rotation"
+    ],
+    [
+        "c32",
+        "Pallof press con pausa",
+        "core",
+        "Estabilidad",
+        "Polea",
+        "pallof hold"
+    ],
+    [
+        "c33",
+        "Pallof press con pasos laterales",
+        "core",
+        "Estabilidad",
+        "Polea",
+        "pallof walkout"
+    ],
+    [
+        "c34",
+        "Woodchopper de arriba hacia abajo",
+        "core",
+        "Estabilidad",
+        "Polea",
+        "cable woodchop high to low"
+    ],
+    [
+        "c35",
+        "Woodchopper de abajo hacia arriba",
+        "core",
+        "Estabilidad",
+        "Polea",
+        "cable woodchop low to high"
+    ],
+    [
+        "c36",
+        "Flexión lateral del tronco con mancuerna",
+        "core",
+        "Oblicuos",
+        "Mancuernas",
+        "dumbbell side bend"
+    ],
+    [
+        "c37",
+        "Paseo del granjero unilateral",
+        "core",
+        "Oblicuos",
+        "Mancuernas",
+        "suitcase carry"
+    ],
+    [
+        "c10",
+        "Russian twist",
+        "core",
+        "Oblicuos",
+        "Peso corporal",
+        "giros rusos"
+    ],
+    [
+        "c38",
+        "Extensiones lumbares en banco 45°",
+        "core",
+        "Zona lumbar",
+        "Banco",
+        "back extension hyperextension"
+    ],
+    [
+        "c39",
+        "Extensiones lumbares horizontales",
+        "core",
+        "Zona lumbar",
+        "Banco",
+        "roman chair back extension"
+    ],
+    [
+        "c40",
+        "Extensión lumbar en máquina",
+        "core",
+        "Zona lumbar",
+        "Máquina",
+        "back extension machine"
+    ],
+    [
+        "c41",
+        "Rueda abdominal de rodillas",
+        "core",
+        "Estabilidad",
+        "Rueda / pelota",
+        "ab wheel rollout"
+    ],
+    [
+        "c42",
+        "Rollout en pelota suiza",
+        "core",
+        "Estabilidad",
+        "Rueda / pelota",
+        "stability ball rollout"
+    ],
+    [
+        "c43",
+        "Stir the pot en pelota suiza",
+        "core",
+        "Estabilidad",
+        "Rueda / pelota",
+        "stir the pot"
+    ]
+]
+    .map(([id,name,group,muscle,equipment,aliases]) => ({id,name,group,muscle,equipment,aliases,custom:false}));
   // Plan sugerido: las series y rangos de repeticiones son objetivos editables,
   // no cargas prescritas. Los días A quedan completos si solo se entrena 3 días.
   const ROUTINE_PLAN = {
-    push_a:[['p01',3,'6–10'],['p02',2,'8–12'],['p10',2,'8–12'],['p04',2,'12–15'],['p05',2,'10–15']],
-    pull_a:[['u01',3,'8–12'],['u03',3,'8–12'],['u08',2,'12–15'],['u04',2,'10–12'],['u05',2,'10–15']],
+    push_a:[['p01',3,'6–10'],['p02',2,'8–12'],['p10',2,'8–12'],['p04',2,'12–15'],['p15',2,'10–15']],
+    pull_a:[['u01',3,'8–12'],['u03',3,'8–12'],['u08',2,'12–15'],['u17',2,'10–12'],['u05',2,'10–15']],
     legs_a:[['l01',3,'6–10'],['l04',2,'10–15'],['l13',2,'8–12'],['l14',2,'12–15'],['l05',2,'10–15']],
-    push_b:[['p13',2,'8–12'],['p14',2,'8–12'],['p11',2,'10–15'],['p04',2,'12–15'],['p15',2,'10–15']],
-    pull_b:[['u13',2,'8–12'],['u12',2,'8–12'],['u11',2,'10–15'],['u10',2,'12–15'],['u09',2,'10–15']],
+    push_b:[['p16',2,'8–12'],['p14',2,'8–12'],['p17',2,'10–15'],['p04',2,'12–15'],['p18',2,'10–15']],
+    pull_b:[['u14',2,'8–12'],['u12',2,'8–12'],['u15',2,'10–15'],['u10',2,'12–15'],['u16',2,'10–15']],
     legs_b:[['l02',2,'10–12'],['l10',2,'8–10 por pierna'],['l15',2,'10–15'],['l11',2,'12–15'],['l06',2,'12–15']],
-    core:[['c01',2,'20–30 segundos'],['c03',2,'8–10 por lado'],['c07',2,'10–12 por lado']]
+    core:[['c11',2,'10–15'],['c12',2,'10–15 por lado']]
   };
   // Plantillas anteriores: no trasladar por accidente ejercicios retirados del
   // plan (ej. peso muerto rumano) al iniciar una sesión con un historial viejo.
@@ -63,6 +1901,12 @@
     legs_a:['l01','l02','l03','l04','l06'],
     legs_b:['l09','l10','l08','l05','l06'],
     core:['c01','c03','c07']
+  };
+  // IDs que pertenecieron a plantillas predeterminadas anteriores.
+  // Así no reaparecen como añadidos cuando se carga un entrenamiento viejo.
+  const RETIRED_TEMPLATE_IDS = {
+    push_a:['p05'], pull_a:['u04'], push_b:['p13','p11','p15'],
+    pull_b:['u13','u11','u09'], legs_a:[], legs_b:[], core:['c01','c03','c07']
   };
   const DEFAULTS = Object.fromEntries(Object.entries(ROUTINE_PLAN).map(([day,plan])=>[day,plan.map(([id])=>id)]));
   // Compatibilidad con registros antiguos sin variante A/B.
@@ -110,6 +1954,12 @@
   const fmt = value => value==null ? '—' : Number(value).toLocaleString('es-UY',{maximumFractionDigits:2});
   const groupTag = day => `<span class="tag ${es(routineGroup(day))}">${es(day==='cardio'?'Cardio':routineLabel(day))}</span>`;
   const allExercises = () => [...CATALOG, ...db.customExercises];
+  const searchText = text => String(text||'').toLocaleLowerCase('es').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9 ]/g,' ');
+  const matchesExercise = (ex,query) => {
+    const terms=searchText(query).split(/\s+/).filter(Boolean);
+    const blob=searchText([ex.name,ex.muscle,ex.equipment,ex.aliases,DAY[ex.group]?.label].join(' '));
+    return terms.every(term=>blob.includes(term));
+  };
   const exerciseById = id => allExercises().find(ex => ex.id === id);
   const blankSet = () => ({id:uid(),reps:'',seconds:'',weight:'',done:false,touched:false});
   const newData = () => ({version:2,sessions:[],measurements:[],customExercises:[],draft:null});
@@ -142,7 +1992,7 @@
     <div class="sidebar-brand-row"><div class="brand"><span class="brand-icon">R<span class="brand-mark">/</span></span><div><div class="brand-name">REP<span class="brand-slash">/</span>BIT</div><span class="brand-meta">TRAINING LOG</span></div></div><button class="sidebar-close" type="button" data-action="toggle-sidebar" aria-label="Cerrar navegación" title="Cerrar navegación">${icon('close',19)}</button></div>
     <div class="nav-section-label">NAVEGACIÓN <span>01—07</span></div>
     <nav class="nav-list" aria-label="Secciones">${navItems.map(navButton).join('')}</nav>
-    <div class="sidebar-footer"><span>REP/BIT <b>2.4</b></span><span class="live-dot" title="Almacenamiento local"></span></div>
+    <div class="sidebar-footer"><span>REP/BIT <b>2.5</b></span><span class="live-dot" title="Almacenamiento local"></span></div>
   </aside>`;}
   function navButton(item){return `<button type="button" class="nav-link ${ui.page===item.id?'active':''}" data-action="nav" data-page="${item.id}" ${ui.page===item.id?'aria-current="page"':''}>${icon(item.ico,18)}<span>${item.label}</span><span class="nav-link-arrow">${icon('arrow',15)}</span></button>`;}
   function appbar(){const label=navItems.find(item=>item.id===ui.page)?.label||'Inicio';return `<div class="appbar"><div class="appbar-left"><button type="button" class="menu-trigger" data-action="toggle-sidebar" aria-controls="app-sidebar" aria-expanded="${ui.sidebarOpen}" aria-label="${ui.sidebarOpen?'Cerrar':'Abrir'} navegación" title="${ui.sidebarOpen?'Cerrar':'Abrir'} menú">${icon('menu',20)}</button><div class="appbar-rule"></div><span class="appbar-location">${es(label)}</span></div><div class="appbar-right">${db.draft?`<button class="active-session" data-action="nav" data-page="entrenar"><span class="pulse"></span> ${es(routineLabel(db.draft.day))} EN CURSO</button>`:''}<span class="appbar-date">${new Date().toLocaleDateString('es-UY',{day:'2-digit',month:'short',year:'numeric'})}</span><span class="appbar-stamp">RB<span>/</span></span></div></div>`;}
@@ -230,7 +2080,7 @@
     const seenNames=new Set(items.map(item=>item.name.toLocaleLowerCase('es')));
     // Conserva también ejercicios adicionales de la última sesión, sin duplicar
     // los que ya forman parte de la plantilla predeterminada.
-    const legacyIds=new Set(PREVIOUS_DEFAULTS[day]||[]);
+    const legacyIds=new Set([...(PREVIOUS_DEFAULTS[day]||[]),...(RETIRED_TEMPLATE_IDS[day]||[])]);
     for(const oldItem of lastRoutine?.items||[]){
       // Evitá que los ejercicios de la antigua rutina vuelvan a aparecer
       // como extras: eso reintroduciría peso muerto en Legs A.
@@ -253,7 +2103,7 @@
   function renderCore(){
     const recent=db.sessions.filter(isCore);
     return `${pageHeader('Core.','')}
-      <section class="card core-hero"><span class="routine-symbol core">${icon('activity',28)}</span><div><h2>Sesión de Core</h2><p>PLANCHAS / DEAD BUG / PALLOF PRESS</p></div><button class="btn primary" data-action="start-session" data-day="core">${db.draft?'Ver sesión en curso':'Empezar Core'} ${icon('arrow',16)}</button></section>
+      <section class="card core-hero"><span class="routine-symbol core">${icon('activity',28)}</span><div><h2>Sesión de Core</h2><p>CRUNCH EN MÁQUINA / OBLICUOS</p></div><button class="btn primary" data-action="start-session" data-day="core">${db.draft?'Ver sesión en curso':'Empezar Core'} ${icon('arrow',16)}</button></section>
       <div class="section-header"><h2 class="section-title">Últimas sesiones de Core</h2><button class="btn ghost small" data-action="nav" data-page="historial">Ver historial ${icon('arrow',13)}</button></div>
       ${recent.length?recentList(recent,6):empty('Todavía no hay Core registrado','Tus sesiones de Core aparecerán aquí cuando guardes la primera.','activity',`<button class="btn small primary" data-action="start-session" data-day="core">Iniciar Core ${icon('arrow',14)}</button>`)}
       `;
@@ -314,8 +2164,12 @@
     changePage('entrenar');
     toast('Borrador descartado');
   }
-  function exercisePicker(){ui.modalSearch='';openModal(`${modalHead('Agregar ejercicio')}<div class="field mb-16"><label for="picker-search">Buscar en la biblioteca</label><input class="input" id="picker-search" placeholder="Ej.: remo, press, sentadilla..." data-bind="picker-search" autocomplete="off"></div><div class="modal-scroll" id="picker-results">${pickerResults()}</div><div class="divider"></div><button class="btn ghost w-full" data-action="open-custom-modal">${icon('plus',15)} Crear un ejercicio propio</button>`);}
-  function pickerResults(){const q=ui.modalSearch.trim().toLocaleLowerCase('es');const arr=allExercises().filter(ex=>ex.name.toLocaleLowerCase('es').includes(q));return arr.length ? arr.map(ex=>`<div class="modal-exercise"><div><b>${es(ex.name)}</b><div><span>${DAY[ex.group]?.label||'Personalizado'}${ex.custom?' · Propio':''}</span></div></div><button class="btn small ghost" data-action="pick-exercise" data-id="${es(ex.id)}">${icon('plus',14)} Añadir</button></div>`).join('') : `<div class="empty" style="padding:16px">No hay coincidencias.</div>`;}
+  function exercisePicker(){ui.modalSearch='';ui.pickerGroup=routineGroup(db.draft?.day)||'todos';openModal(`${modalHead('Agregar ejercicio')}<div class="field mb-16"><label for="picker-search">Buscar en la biblioteca</label><input class="input" id="picker-search" placeholder="Ej.: remo, press, sentadilla..." data-bind="picker-search" autocomplete="off"></div><div class="picker-tabs" id="picker-tabs">${pickerTabs()}</div><div class="modal-scroll" id="picker-results">${pickerResults()}</div><div class="divider"></div><button class="btn ghost w-full" data-action="open-custom-modal">${icon('plus',15)} Crear un ejercicio propio</button>`);}
+  function pickerTabs(){return [['todos','Todos'],['push','Push'],['pull','Pull'],['legs','Legs'],['core','Core']].map(([key,label])=>`<button class="${ui.pickerGroup===key?'active':''}" type="button" data-action="picker-group" data-value="${key}">${label}</button>`).join('');}
+  function pickerResults(){
+    const arr=allExercises().filter(ex=>(ui.pickerGroup==='todos'||ex.group===ui.pickerGroup)&&matchesExercise(ex,ui.modalSearch)).sort((a,b)=>a.name.localeCompare(b.name,'es'));
+    return `<div class="picker-count">${arr.length} ejercicios</div>`+(arr.length ? arr.map(ex=>`<div class="modal-exercise"><div><b>${es(ex.name)}</b><div><span>${es(ex.muscle||DAY[ex.group]?.label||'General')}${ex.equipment?' · '+es(ex.equipment):''}${ex.custom?' · Propio':''}</span></div></div><button class="btn small ghost" data-action="pick-exercise" data-id="${es(ex.id)}">${icon('plus',14)} Añadir</button></div>`).join('') : `<div class="empty" style="padding:16px">No hay coincidencias.</div>`);
+  }
   function customModal(){openModal(`${modalHead('Nuevo ejercicio')}<form id="custom-exercise-form"><div class="stack"><div class="field"><label for="custom-name">Nombre del ejercicio</label><input class="input" id="custom-name" name="name" minlength="2" maxlength="80" placeholder="Ej.: remo unilateral en máquina" required></div><div class="field"><label for="custom-group">Día al que pertenece</label><select class="select" id="custom-group" name="group"><option value="push">Push</option><option value="pull">Pull</option><option value="legs">Legs</option><option value="core">Core</option></select></div></div><div class="form-actions"><button type="button" class="btn ghost" data-action="close-modal">Cancelar</button><button type="submit" class="btn primary">Guardar ejercicio</button></div></form>`);}
   function renderHistory(){
     const arr=sortByDate(db.sessions).filter(s=>ui.historyFilter==='todos' || (ui.historyFilter==='fuerza'?(s.kind==='strength'&&!isCore(s)):ui.historyFilter==='core'?isCore(s):s.kind==='cardio'));
@@ -334,12 +2188,12 @@
     <div class="two-col"><div><section class="card card-pad"><h2 class="section-title mb-16">${editing?'Actualizar sesión':'Nueva sesión de cardio'}</h2><form id="cardio-form"><div class="form-grid cols-2"><div class="field"><label for="cardio-activity">Actividad</label><select class="select" id="cardio-activity" name="activity" required>${CARDIO_TYPES.map(v=>`<option value="${es(v)}" ${editing?.activity===v?'selected':''}>${es(v)}</option>`).join('')}</select></div><div class="field"><label for="cardio-date">Fecha</label><input class="input" id="cardio-date" type="date" name="date" value="${es(editing?.date||today())}" required></div><div class="field"><label for="cardio-minutes">Duración (minutos)</label><input class="input" id="cardio-minutes" type="number" min="1" max="10000" step="1" name="minutes" inputmode="numeric" placeholder="Ej.: 30" value="${editing?es(editing.minutes):''}" required></div><div class="field"><label for="cardio-distance">Distancia (km, opcional)</label><input class="input" id="cardio-distance" type="number" min="0" max="100000" step="0.01" name="distance" inputmode="decimal" placeholder="Ej.: 4.5" value="${editing?.distance!=null?es(editing.distance):''}"></div><div class="field wide"><label for="cardio-notes">Notas (opcional)</label><textarea class="textarea" id="cardio-notes" name="notes" placeholder="Ritmo, sensaciones, recorrido...">${es(editing?.notes||'')}</textarea></div></div><div class="form-actions">${editing?`<button class="btn ghost" type="button" data-action="cancel-cardio-edit">Cancelar</button>`:''}<button class="btn primary" type="submit">${icon('check',16)} ${editing?'Guardar cambios':'Guardar cardio'}</button></div></form></section></div><div><section class="card card-pad"><h2 class="section-title mb-16">Actividad reciente</h2>${recentList(db.sessions.filter(s=>s.kind==='cardio'),5)}</section></div></div>`;}
 
   function renderLibrary(){
-    const arr=allExercises().filter(ex=>(ui.libraryFilter==='todos'||ui.libraryFilter===ex.group||ui.libraryFilter==='propios'&&ex.custom) && ex.name.toLocaleLowerCase('es').includes(ui.libraryQuery.toLocaleLowerCase('es'))).sort((a,b)=>a.name.localeCompare(b.name,'es'));
+    const arr=allExercises().filter(ex=>(ui.libraryFilter==='todos'||ui.libraryFilter===ex.group||ui.libraryFilter==='propios'&&ex.custom) && matchesExercise(ex,ui.libraryQuery)).sort((a,b)=>a.name.localeCompare(b.name,'es'));
     return `${pageHeader('Ejercicios.','',`<button class="btn primary small" data-action="open-custom-modal">${icon('plus',16)} Crear ejercicio</button>`)}
       <div class="filters"><input class="input filter-search" type="search" id="library-query" data-bind="library-query" placeholder="Buscar por nombre..." value="${es(ui.libraryQuery)}" aria-label="Buscar ejercicio"><div class="segment" role="group" aria-label="Filtro de biblioteca">${[['todos','Todos'],['push','Push'],['pull','Pull'],['legs','Legs'],['core','Core'],['propios','Propios']].map(([id,label])=>`<button data-action="library-filter" data-value="${id}" class="${ui.libraryFilter===id?'active':''}">${label}</button>`).join('')}</div></div><div class="muted tiny mb-16">${arr.length} ejercicios disponibles</div>
       ${arr.length?`<div class="library-grid" id="library-results">${libraryItems(arr)}</div>`:empty('Sin coincidencias','Probá con otra búsqueda o creá un ejercicio personalizado.','search')}`;
   }
-  function libraryItems(arr){return arr.map(ex=>`<article class="card library-item"><div><h3>${es(ex.name)}</h3><p>${DAY[ex.group]?.label||'General'} ${ex.custom?'· Creado por vos':'· Precargado'}</p></div>${ex.custom?`<button class="btn ghost icon-only" data-action="delete-exercise" data-id="${es(ex.id)}" title="Eliminar ejercicio propio" aria-label="Eliminar ${es(ex.name)}">${icon('trash',15)}</button>`:groupTag(ex.group)}</article>`).join('');}
+  function libraryItems(arr){return arr.map(ex=>`<article class="card library-item"><div><h3>${es(ex.name)}</h3><p>${es(ex.muscle||DAY[ex.group]?.label||'General')}${ex.equipment?' · '+es(ex.equipment):''} ${ex.custom?'· Propio':'· Precargado'}</p></div>${ex.custom?`<button class="btn ghost icon-only" data-action="delete-exercise" data-id="${es(ex.id)}" title="Eliminar ejercicio propio" aria-label="Eliminar ${es(ex.name)}">${icon('trash',15)}</button>`:groupTag(ex.group)}</article>`).join('');}
   function renderData(){return `${pageHeader('Datos.','')}
     <div class="data-tiles">
       <article class="card data-tile"><span class="data-index">01 / EXPORTAR</span>${icon('file',26)}<h3>Sesiones CSV</h3><button class="btn ghost" data-action="export-csv">${icon('download',16)} Exportar CSV</button></article>
@@ -385,6 +2239,7 @@
     if(action==='discard-draft'){confirmDiscardDraft();return;}
     if(action==='confirm-discard-draft'){discardDraft();return;}
     if(action==='open-exercise-picker'){exercisePicker();return;}
+    if(action==='picker-group'){ui.pickerGroup=button.dataset.value;document.getElementById('picker-tabs').innerHTML=pickerTabs();document.getElementById('picker-results').innerHTML=pickerResults();return;}
     if(action==='open-custom-modal'){customModal();return;}
     if(action==='pick-exercise'){const ex=exerciseById(button.dataset.id);if(ex && db.draft){db.draft.items.push(makeItem(ex));save();closeModal();render();toast('Ejercicio agregado');}return;}
     if(action==='add-set'){const item=findDraftItem(button.dataset.item);if(item){if(item.sets.length>=30){alert('Máximo 30 series por ejercicio.');return;}item.sets.push(blankSet());save();render();}return;}
